@@ -12,5 +12,6 @@ RUN curl -Of https://downloads.rclone.org/v1.63.1/rclone-v1.63.1-linux-amd64.zip
 
 EXPOSE 8080
 
-CMD echo "$RCLONE_CONFIG" > /root/.config/rclone/rclone.conf && \
+CMD mkdir -p /root/.config/rclone && \
+    echo "$RCLONE_CONFIG" > /root/.config/rclone/rclone.conf && \
     rclone serve webdav gdrive: --addr :8080 --user $WEBDAV_USER --pass $WEBDAV_PASS
