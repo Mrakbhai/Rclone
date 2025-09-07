@@ -1,11 +1,16 @@
 FROM alpine:latest
 
-# Install rclone + bash + ca-certificates
-RUN apk add --no-cache bash curl ca-certificates \
-    && curl https://rclone.org/install.sh | bash
+# Install dependencies
+RUN apk add --no-cache bash curl ca-certificates
+
+# Download and install rclone binary
+RUN curl -Of https://downloads.rclone.org/v1.63.1/rclone-v1.63.1-linux-amd64.zip \
+    && unzip rclone-v1.63.1-linux-amd64.zip \
+    && cp rclone-v1.63.1-linux-amd64/rclone /usr/bin/ \
+    && chmod 755 /usr/bin/rclone \
+    && rm -rf rclone-v1.63.1-linux-amd64*
 
 EXPOSE 8080
 
-# Serve rclone as WebDAV using env variables
 CMD echo "$RCLONE_CONFIG" > /root/.config/rclone/rclone.conf && \
     rclone serve webdav gdrive: --addr :8080 --user $WEBDAV_USER --pass $WEBDAV_PASS
