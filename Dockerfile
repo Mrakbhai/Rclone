@@ -15,7 +15,7 @@ RUN curl -fsSL "https://downloads.rclone.org/${RCLONE_VER}/rclone-${RCLONE_VER}-
 
 # download and bundle webui assets
 RUN mkdir -p /app/webui \
-  && curl -fsSL https://github.com/rclone/rclone-webui-react/releases/latest/download/rclone-webui.zip -o /tmp/webui.zip \
+  && curl -fsSL https://github.com/rclone/rclone-webui-react/releases/download/v2.0.5/currentbuild.zip -o /tmp/webui.zip \
   && unzip /tmp/webui.zip -d /app/webui \
   && rm -rf /tmp/webui.zip
 
