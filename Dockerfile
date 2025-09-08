@@ -36,4 +36,5 @@ CMD mkdir -p /root/.config/rclone && \
       --rc-pass "$RCLONE_RC_PASS" \
       --rc-web-gui \
       --rc-web-gui-no-open-browser \
-      --rc-web-gui-force-open-dir /app/webui
+      --rc-web-gui-update off \
+      --rc-web-gui-root /app/webui
