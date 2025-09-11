@@ -31,7 +31,10 @@ ENV RCLONE_CONF_PATH=/root/.config/rclone/rclone.conf
 CMD mkdir -p /root/.config/rclone && \
     if [ -n "$RCLONE_CONFIG_B64" ]; then echo "$RCLONE_CONFIG_B64" | base64 -d > "$RCLONE_CONF_PATH"; fi && \
     unset RCLONE_CONFIG && \
-    /usr/bin/rclone rcd /app/webui \
+    /usr/bin/rclone rcd \
       --rc-addr :5572 \
       --rc-user "$RCLONE_RC_USER" \
-      --rc-pass "$RCLONE_RC_PASS"
+      --rc-pass "$RCLONE_RC_PASS" \
+      --rc-web-gui \
+      --rc-web-gui-no-open-browser \
+      --rc-web-gui-update=false
